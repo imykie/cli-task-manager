@@ -12,6 +12,10 @@ To add task
 ```shell
 task add "Do Something"
 ```
+List Tasks
+```shell
+task list
+```
 Get help
 ```shell
 task help
