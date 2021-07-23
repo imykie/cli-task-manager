@@ -1,5 +1,5 @@
-# Task
-Task is a simple CLI task manager that can be used to manage your day to day tasks
+# Task CLI
+Task CLI is a simple command line task manager that can be used to manage your day to day tasks
 
 ### Installation
 Change directory to the root of the project
