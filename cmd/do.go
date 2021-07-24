@@ -3,14 +3,16 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"os"
 	"strconv"
+	"task/db"
 )
 
 var doCmd = &cobra.Command{
-	Use: "do",
+	Use:   "do",
 	Short: "Sets command to done",
 
-	Run: func(cmd *cobra.Command, args []string){
+	Run: func(cmd *cobra.Command, args []string) {
 		var ids []int
 		for _, arg := range args {
 			id, err := strconv.Atoi(arg)
@@ -20,10 +22,29 @@ var doCmd = &cobra.Command{
 			}
 			ids = append(ids, id)
 		}
-		fmt.Println(ids)
+
+		tasks, err := db.AllTasks()
+		if err != nil {
+			fmt.Println("Something went wrong:", err.Error())
+			os.Exit(1)
+		}
+
+		for _, id := range ids {
+			if id <= 0 || id > len(tasks) {
+				fmt.Println("Invalid task number:", id)
+				continue
+			}
+			task := tasks[id-1]
+			err := db.DeleteTask(task.Key)
+			if err != nil {
+				fmt.Printf("Failed to mark \"%d\" as completed.\nError: %s\n", id, err)
+			} else {
+				fmt.Printf("Marked task \"%d\" as completed.\n", id)
+			}
+		}
 	},
 }
 
-func init(){
+func init() {
 	RootCmd.AddCommand(doCmd)
 }
