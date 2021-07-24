@@ -9,7 +9,7 @@ import (
 	"task/db"
 )
 
-func main(){
+func main() {
 	home, _ := homedir.Dir()
 	dbPath := filepath.Join(home, "tasks.db")
 	must(db.Init(dbPath))
@@ -17,7 +17,7 @@ func main(){
 	cmd.Execute()
 }
 
-func must (err error){
+func must(err error) {
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
