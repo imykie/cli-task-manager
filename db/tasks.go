@@ -69,6 +69,19 @@ func AllTasks() ([]Task, error) {
 	return tasks, nil
 }
 
+func DeleteTask (key int) error {
+	err := db.Update(func(tx *bolt.Tx) error {
+		b := tx.Bucket(taskBucket)
+		return b.Delete(intToByteSlice(key))
+	})
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func intToByteSlice(t int) []byte {
 	b := make([]byte, 8)
 	binary.BigEndian.PutUint64(b, uint64(t))
