@@ -3,21 +3,16 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"os"
 	"task/db"
 )
 
 var listCmd = &cobra.Command{
-	Use: "list",
+	Use:   "list",
 	Short: "Lists your tasks.",
 
-	Run: func(cmd *cobra.Command, args []string){
+	Run: func(cmd *cobra.Command, args []string) {
 		tasks, err := db.AllTasks()
-
-		if err != nil {
-			fmt.Println("Something went wrong: ", err.Error())
-			os.Exit(1)
-		}
+		Must(err)
 
 		if len(tasks) == 0 {
 			fmt.Println("You have no task to complete! Add new task or take a break 😊✨✨✨")
@@ -31,6 +26,6 @@ var listCmd = &cobra.Command{
 	},
 }
 
-func init(){
+func init() {
 	RootCmd.AddCommand(listCmd)
 }

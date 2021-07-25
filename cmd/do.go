@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"os"
 	"strconv"
 	"task/db"
 )
@@ -24,10 +23,7 @@ var doCmd = &cobra.Command{
 		}
 
 		tasks, err := db.AllTasks()
-		if err != nil {
-			fmt.Println("Something went wrong:", err.Error())
-			os.Exit(1)
-		}
+		Must(err)
 
 		for _, id := range ids {
 			if id <= 0 || id > len(tasks) {

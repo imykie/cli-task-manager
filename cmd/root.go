@@ -18,3 +18,10 @@ func Execute() {
 		os.Exit(1)
 	}
 }
+
+func Must(err error) {
+	if err != nil {
+		fmt.Println("something went wrong:", err.Error())
+		os.Exit(1)
+	}
+}

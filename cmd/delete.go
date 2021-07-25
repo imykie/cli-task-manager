@@ -6,14 +6,14 @@ import (
 )
 
 var deleteCmd = &cobra.Command{
-	Use: "delete",
+	Use:   "delete",
 	Short: "Deletes task from task list",
 
-	Run: func(cmd *cobra.Command, args []string){
+	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Delete called!")
 	},
 }
 
-func init(){
+func init() {
 	RootCmd.AddCommand(deleteCmd)
 }
