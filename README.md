@@ -16,6 +16,14 @@ List Tasks
 ```shell
 task list
 ```
+Do Task
+```shell
+task do 1 2
+```
+Update Task
+```shell
+task update 1 "Change task"
+```
 Get help
 ```shell
 task help
